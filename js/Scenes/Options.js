@@ -4,6 +4,10 @@ export class OptionsScene extends Scene {
     constructor() {
         super('options');
 
+        this.changes = {
+            enableDiagonal: false,
+            dimensions: false
+        };
         this.addEventListeners();
     }
 
@@ -12,17 +16,23 @@ export class OptionsScene extends Scene {
             {
                 target: document.querySelector('.close-options'),
                 event: 'click',
-                callback: () => window.engine.load('game')
+                callback: () => window.engine.load('game', this.changes.enableDiagonal, this.changes.dimensions)
             },
             {
                 target: document.getElementById('rows'),
                 event: 'change',
-                callback: ({ target }) => window.game.rows = parseInt(target.value)
+                callback: ({ target }) => {
+                    window.game.rows = parseInt(target.value);
+                    this.changes.dimensions = true;
+                }
             },
             {
                 target: document.getElementById('cols'),
                 event: 'change',
-                callback: ({ target }) => window.game.cols = parseInt(target.value)
+                callback: ({ target }) => {
+                    window.game.cols = parseInt(target.value);
+                    this.changes.dimensions = true;
+                }
             },
             {
                 target: document.getElementById('frameRate'),
@@ -37,7 +47,10 @@ export class OptionsScene extends Scene {
             {
                 target: document.getElementById('enableDiagonal'),
                 event: 'click',
-                callback: ({ target }) => window.game.enableDiagonal = target.checked
+                callback: ({ target }) => {
+                    window.game.enableDiagonal = target.checked;
+                    this.changes.enableDiagonal = true;
+                }
             }
         ];
 

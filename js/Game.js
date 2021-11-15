@@ -1,9 +1,5 @@
-import { Spot } from './Spot.js';
-
 export class Game {
-    constructor() {
-        const width = 960, height = 600;
-
+    constructor(width, height, grid) {
         this.canvas = document.getElementById('canvas');
         this.ctx = this.canvas.getContext('2d');
 
@@ -14,14 +10,7 @@ export class Game {
         this.acc = 0;
         this.last = performance.now();
 
-        const rows = window.game.rows, cols = window.game.cols;
-        this.grid = Array(cols)
-            .fill(null)
-            .map((_, i) => Array(rows)
-                .fill(null)
-                .map((_, j) => new Spot(i, j, width / cols, height / rows)));
-        this.grid.forEach(col => col.forEach(spot => spot.addNeighbors(this.grid)));
-
+        this.grid = grid;
         this.start = this.end = null;
         this.openSet = new Set();
         this.closedSet = new Set();

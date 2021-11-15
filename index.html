@@ -12,11 +12,26 @@
     <script src="./js/app.js" type="module"></script>
 </head>
 <body>
+    <div class="heading main">
+        A* Algorithm Visualization
+    </div>
+
+    <div class="labels">
+        <div>
+            <i class="green-round"></i> Open Set
+        </div>
+
+        <div>
+            <i class="red-round"></i> Closed Set
+        </div>
+    </div>
+
     <div class="container">
         <div id="game">
             <div class="relative">
                 <div class="options">
-                    <img src="./images/settings.svg" alt="Settings" />
+                    <img src="./images/refresh-cw.svg" alt="Refresh" id="refresh" />
+                    <img src="./images/settings.svg" alt="Settings" id="settings" />
                 </div>
 
                 <div class="game-message">

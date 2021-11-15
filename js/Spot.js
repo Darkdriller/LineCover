@@ -32,6 +32,7 @@ export class Spot {
     }
 
     addNeighbors(grid) {
+        this.neighbors = [];
         const { x, y } = this;
 
         if (x < grid.length - 1) this.neighbors.push(grid[x + 1][y]);
