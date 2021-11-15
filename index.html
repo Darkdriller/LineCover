@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Visualization of A* Algorithm</title>
+
+    <link rel="stylesheet" href="./css/app.css" />
+
+    <script src="./js/app.js" type="module"></script>
+</head>
+<body>
+    <div class="container">
+        <div id="game">
+            <div class="relative">
+                <div class="options">
+                    <img src="./images/settings.svg" alt="Settings" />
+                </div>
+
+                <div class="game-message">
+                    Click on any two nodes to set as the start and end nodes.
+                </div>
+
+                <canvas id="canvas"></canvas>
+            </div>
+        </div>
+
+        <div id="options">
+            <div class="relative">
+                <div class="close-options">
+                    <img src="./images/x.svg" alt="Close" />
+                </div>
+
+                <input type="range" />
+                <input type="range" />
+            </div>
+        </div>
+    </div>
+</body>
+</html>
