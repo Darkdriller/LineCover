@@ -10,7 +10,7 @@ export class Game {
         this.canvas.width = width;
         this.canvas.height = height;
 
-        this.dt = 1000 / 60;
+        this.dt = 1000 / window.game.frameRate;
         this.acc = 0;
         this.last = performance.now();
 
@@ -34,10 +34,9 @@ export class Game {
         this.acc += now - this.last;
         while (this.acc > this.dt && !this.gameOver) {
             this.update();
+            this.draw();
             this.acc -= this.dt;
         }
-
-        this.draw();
 
         this.last = performance.now();
         if (!this.gameOver) requestAnimationFrame(this.loop.bind(this));
@@ -82,7 +81,7 @@ export class Game {
 
             current.neighbors.forEach(neighbor => {
                 if (neighbor.wall || this.closedSet.has(neighbor)) return;
-                const tempG = current.g + 1; // 1 is the cost of moving to a neighbor
+                const tempG = current.g + (current.isDiagonal(neighbor) ? window.game.diagonalCost : 1);
 
                 let newPath = false;
                 if (this.openSet.has(neighbor)) {
@@ -109,8 +108,10 @@ export class Game {
     }
 
     heuristic(a, b) {
-        // return Math.abs(a.x - b.x) + Math.abs(a.y - b.y); // Manhattan distance - not considering diagonals
-        return Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2)); // Euclidean distance - including diagonals
+        if (window.game.enableDiagonal)
+            return Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2)); // Euclidean distance - including diagonals
+
+        return Math.abs(a.x - b.x) + Math.abs(a.y - b.y); // Manhattan distance - not considering diagonals
     }
 
     onClick(event) {

@@ -7,7 +7,10 @@ export class GameScene extends Scene {
 
         window.game = {
             rows: 20,
-            cols: 34
+            cols: 34,
+            frameRate: 2,
+            diagonalCost: 1,
+            enableDiagonal: true
         }
 
         this.events = [];

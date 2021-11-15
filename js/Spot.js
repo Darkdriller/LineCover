@@ -39,11 +39,13 @@ export class Spot {
         if (y < grid[0].length - 1) this.neighbors.push(grid[x][y + 1]);
         if (y > 0) this.neighbors.push(grid[x][y - 1]);
 
-        // diagonals
-        if (x > 0 && y > 0) this.neighbors.push(grid[x - 1][y - 1]);
-        if (x < grid.length - 1 && y > 0) this.neighbors.push(grid[x + 1][y - 1]);
-        if (x > 0 && y < grid[0].length - 1) this.neighbors.push(grid[x - 1][y + 1]);
-        if (x < grid.length - 1 && y < grid[0].length - 1) this.neighbors.push(grid[x + 1][y + 1]);
+        if (window.game.enableDiagonal) {
+            // diagonals
+            if (x > 0 && y > 0) this.neighbors.push(grid[x - 1][y - 1]);
+            if (x < grid.length - 1 && y > 0) this.neighbors.push(grid[x + 1][y - 1]);
+            if (x > 0 && y < grid[0].length - 1) this.neighbors.push(grid[x - 1][y + 1]);
+            if (x < grid.length - 1 && y < grid[0].length - 1) this.neighbors.push(grid[x + 1][y + 1]);
+        }
     }
 
     clear() {
@@ -54,6 +56,6 @@ export class Spot {
     }
 
     isDiagonal(spot) {
-        return (Math.abs(this.x - spot.x) === 1 && Math.abs(this.y - spot.y) === 1) * 1;
+        return Math.abs(this.x - spot.x) === 1 && Math.abs(this.y - spot.y) === 1;
     }
 }

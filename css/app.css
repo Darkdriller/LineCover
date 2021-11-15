@@ -109,3 +109,29 @@ body {
     border: 1px solid #ccc;
     outline: none;
 }
+
+.heading {
+    font-size: 28px;
+    width: 100%;
+    font-weight: 600;
+    text-transform: uppercase;
+    justify-content: center;
+}
+
+.row {
+    display: flex;
+    width: 500px;
+    margin: 1rem -1rem;
+}
+
+.form-cell {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 1rem;
+}
+
+.row-wise {
+    flex-direction: row;
+    align-items: center;
+}
