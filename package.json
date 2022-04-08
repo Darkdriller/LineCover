@@ -1,0 +1,26 @@
+{
+  "name": "astar",
+  "version": "1.0.0",
+  "description": "Understand the workings of the A* algorithm through visualization.",
+  "main": "index.html",
+  "scripts": {
+    "dev": "live-server --ignore=$(pwd)/node_modules/",
+    "start": "http-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Advaith3600/AStar.git"
+  },
+  "author": "Advaith A J",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Advaith3600/AStar/issues"
+  },
+  "homepage": "https://github.com/Advaith3600/AStar#readme",
+  "dependencies": {
+    "http-server": "^14.1.0"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}
