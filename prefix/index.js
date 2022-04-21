@@ -1,9 +1,8 @@
 const Node = require('./Node.js');
 
 class AStar {
-    constructor(input, output) {
+    constructor(input) {
         this.input = String(input);
-        this.end = String(output);
 
         this.openSet = new Set([new Node(this.input)]);
         this.closedSet = new Set;
@@ -12,16 +11,12 @@ class AStar {
     }
 
     start() {
+        const start = Date.now();
+        let current = null;
         while (this.openSet.size) {
-            const current = [...this.openSet].reduce((acc, c) => c.f < acc.f ? c : acc);
+            current = [...this.openSet].reduce((acc, c) => c.f < acc.f ? c : acc);
 
-            this.path = [current];
-            let temp = current;
-            while (temp.previous) {
-                this.path.push(temp.previous);
-                temp = temp.previous;
-            }
-            if (current.value === this.end) break;
+            if (this.isEnd(current.value)) break;
 
             this.closedSet.add(current.value);
             this.openSet.delete(current);
@@ -50,12 +45,38 @@ class AStar {
             });
         }
 
+        this.path = [current];
+        let temp = current;
+        while (temp?.previous) {
+            this.path.push(temp.previous);
+            temp = temp.previous;
+        }
+
         console.log(this.path);
-        console.log(`\n\nTotal number of steps: ${this.path.length - 1}`)
+        console.log(`\nSimplified path: ${this.path.map(i => i.value).join(' -> ')}`)
+        console.log(`\n\nTime taken: ${(Date.now() - start) / 1000}s`);
+        console.log(`\nTotal number of steps: ${this.path.length - 1}`);
+        console.log(`Input: ${this.input}\nOutput: ${this.path[0].value}`);
     }
 
-    heuristic(node1, node2) {
-        return parseInt(node1) - parseInt(node2);
+    isEnd(value) {
+        for (let i = 0; i < value.length - 1; i++) {
+            if (Number(value[i]) > Number(value[i + 1]))
+                return false;
+        }
+
+        return true;
+    }
+
+    heuristic(value) {
+        let count = 0;
+        for (let i = 0; i < value.length - 1; i++)
+            // count += Number(value[i] > Number(value[i + 1])) // just normal
+            // count += (Number(value[i]) > Number(value[i + 1]) ? 1 + i : 0); // constantly increasing graph
+            // count += (Number(value[i]) > Number(value[i + 1]) ? 1 + 1/i : 0); // inverse
+            count += (Number(value[i]) > Number(value[i + 1]) ? 1 + value.length - i : 0); // constantly decreasing graph
+
+        return count;
     }
 }
 
